@@ -3,6 +3,7 @@
 namespace LaravelArtifacts;
 
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class LaravelArtifactsServiceProvider extends ServiceProvider
 {
@@ -39,19 +40,26 @@ class LaravelArtifactsServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'artifacts-migrations');
 
-        // Publish views (will be added in Sprint 4)
-        // $this->publishes([
-        //     __DIR__.'/../resources/views' => resource_path('views/vendor/artifacts'),
-        // ], 'artifacts-views');
+        // Publish views
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/artifacts'),
+        ], 'artifacts-views');
 
         // Load migrations from package
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // Load routes
         $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
-        // Load views (will be added in Sprint 4)
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'artifacts');
+        // Load views
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'artifacts');
+
+        // Register Livewire components
+        Livewire::component('markdown-editor', \LaravelArtifacts\Livewire\MarkdownEditor::class);
+        Livewire::component('validation-results', \LaravelArtifacts\Livewire\ValidationResults::class);
+        Livewire::component('version-comparison', \LaravelArtifacts\Livewire\VersionComparison::class);
+        Livewire::component('merge-conflict-resolution', \LaravelArtifacts\Livewire\MergeConflictResolution::class);
 
         // Register commands (will be added in Sprint 2+)
         // if ($this->app->runningInConsole()) {
