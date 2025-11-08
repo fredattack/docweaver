@@ -17,10 +17,11 @@ class LaravelArtifactsServiceProvider extends ServiceProvider
         );
 
         // Register services as singletons
-        // These will be added in Sprint 2-3
-        // $this->app->singleton(MergeService::class);
-        // $this->app->singleton(ValidationService::class);
-        // $this->app->singleton(GenerationService::class);
+        $this->app->singleton(\LaravelArtifacts\Services\VersioningService\VersioningService::class);
+        $this->app->singleton(\LaravelArtifacts\Services\StorageService\StorageService::class);
+        // $this->app->singleton(MergeService::class); // Sprint 3
+        // $this->app->singleton(ValidationService::class); // Sprint 3
+        // $this->app->singleton(GenerationService::class); // Sprint 3
     }
 
     /**
@@ -46,13 +47,13 @@ class LaravelArtifactsServiceProvider extends ServiceProvider
         // Load migrations from package
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        // Load routes (will be added in Sprint 2)
-        // $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+        // Load routes
+        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
 
         // Load views (will be added in Sprint 4)
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'artifacts');
 
-        // Register commands (will be added in Sprint 2)
+        // Register commands (will be added in Sprint 2+)
         // if ($this->app->runningInConsole()) {
         //     $this->commands([
         //         // Artisan commands here
@@ -66,7 +67,8 @@ class LaravelArtifactsServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [
-            // Service classes will be added here
+            \LaravelArtifacts\Services\VersioningService\VersioningService::class,
+            \LaravelArtifacts\Services\StorageService\StorageService::class,
         ];
     }
 }
