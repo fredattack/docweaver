@@ -1,0 +1,72 @@
+<?php
+
+namespace LaravelArtifacts;
+
+use Illuminate\Support\ServiceProvider;
+
+class LaravelArtifactsServiceProvider extends ServiceProvider
+{
+    /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/artifacts.php',
+            'artifacts'
+        );
+
+        // Register services as singletons
+        // These will be added in Sprint 2-3
+        // $this->app->singleton(MergeService::class);
+        // $this->app->singleton(ValidationService::class);
+        // $this->app->singleton(GenerationService::class);
+    }
+
+    /**
+     * Bootstrap services.
+     */
+    public function boot(): void
+    {
+        // Publish configuration
+        $this->publishes([
+            __DIR__.'/../config/artifacts.php' => config_path('artifacts.php'),
+        ], 'artifacts-config');
+
+        // Publish migrations
+        $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'artifacts-migrations');
+
+        // Publish views (will be added in Sprint 4)
+        // $this->publishes([
+        //     __DIR__.'/../resources/views' => resource_path('views/vendor/artifacts'),
+        // ], 'artifacts-views');
+
+        // Load migrations from package
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        // Load routes (will be added in Sprint 2)
+        // $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+
+        // Load views (will be added in Sprint 4)
+        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'artifacts');
+
+        // Register commands (will be added in Sprint 2)
+        // if ($this->app->runningInConsole()) {
+        //     $this->commands([
+        //         // Artisan commands here
+        //     ]);
+        // }
+    }
+
+    /**
+     * Get the services provided by the provider.
+     */
+    public function provides(): array
+    {
+        return [
+            // Service classes will be added here
+        ];
+    }
+}
