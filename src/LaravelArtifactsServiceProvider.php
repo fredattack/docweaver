@@ -19,9 +19,9 @@ class LaravelArtifactsServiceProvider extends ServiceProvider
         // Register services as singletons
         $this->app->singleton(\LaravelArtifacts\Services\VersioningService\VersioningService::class);
         $this->app->singleton(\LaravelArtifacts\Services\StorageService\StorageService::class);
-        // $this->app->singleton(MergeService::class); // Sprint 3
-        // $this->app->singleton(ValidationService::class); // Sprint 3
-        // $this->app->singleton(GenerationService::class); // Sprint 3
+        $this->app->singleton(\LaravelArtifacts\Services\MergeService\MergeService::class);
+        $this->app->singleton(\LaravelArtifacts\Services\ValidationService\ValidationService::class);
+        $this->app->singleton(\LaravelArtifacts\Services\GenerationService\GenerationService::class);
     }
 
     /**
@@ -69,6 +69,9 @@ class LaravelArtifactsServiceProvider extends ServiceProvider
         return [
             \LaravelArtifacts\Services\VersioningService\VersioningService::class,
             \LaravelArtifacts\Services\StorageService\StorageService::class,
+            \LaravelArtifacts\Services\MergeService\MergeService::class,
+            \LaravelArtifacts\Services\ValidationService\ValidationService::class,
+            \LaravelArtifacts\Services\GenerationService\GenerationService::class,
         ];
     }
 }

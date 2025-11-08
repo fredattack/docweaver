@@ -94,8 +94,10 @@ return [
         'strict_mode' => env('ARTIFACTS_QUALITY_STRICT', false),
 
         'rules' => [
-            // Add your validation rule classes here
-            // e.g., \LaravelArtifacts\Services\ValidationService\Rules\CompletenessRule::class,
+            \LaravelArtifacts\Services\ValidationService\Rules\CompletenessRule::class,
+            \LaravelArtifacts\Services\ValidationService\Rules\ConsistencyRule::class,
+            \LaravelArtifacts\Services\ValidationService\Rules\LinkValidityRule::class,
+            \LaravelArtifacts\Services\ValidationService\Rules\CodeExamplesRule::class,
         ],
 
         'required_sections' => [
